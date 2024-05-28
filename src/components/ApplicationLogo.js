@@ -1,10 +1,11 @@
 import Image from 'next/image'
 
-const ApplicationLogo = props => (
+const ApplicationLogo = ({ height, width }) => (
     <Image
         src="/logo.svg"
-        width={250}
-        height={250}
+        width={width || 250}
+        height={height || 250}
+        className="fill-current"
         alt="Unifor logo"
     />
 )
