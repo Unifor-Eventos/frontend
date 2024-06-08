@@ -11,12 +11,13 @@ import { useState } from 'react'
 const Page = () => {
     const { register } = useAuth({
         middleware: 'guest',
-        redirectIfAuthenticated: '/dashboard',
+        redirectIfAuthenticated: '/verify-email',
     })
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [isOrganizer, setIsOrganizer] = useState(false)
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
     const [errors, setErrors] = useState([])
 
@@ -28,6 +29,7 @@ const Page = () => {
             email,
             password,
             password_confirmation: passwordConfirmation,
+            is_organizer: isOrganizer,
             setErrors,
         })
     }
@@ -100,6 +102,27 @@ const Page = () => {
                     }
                     required
                 />
+
+                <InputError
+                    messages={errors.password_confirmation}
+                    className="mt-2"
+                />
+            </div>
+
+            {/* Is Organizer */}
+            <div className="mt-4 flex flex-row items-center">
+                <Input
+                    type="checkbox"
+                    className="block mt-1 mr-2 h-6 w-6"
+                    onChange={event =>
+                        setIsOrganizer(event.target.checked)
+                    }
+                    required
+                />
+
+                <Label htmlFor="isOrganizer">
+                    Are you an event organizer?
+                </Label>
 
                 <InputError
                     messages={errors.password_confirmation}

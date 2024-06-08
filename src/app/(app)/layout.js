@@ -7,7 +7,7 @@ import Loading from '@/app/(app)/Loading'
 const AppLayout = ({ children, header }) => {
     const { user } = useAuth({ middleware: 'auth' })
 
-    if (!user) {
+    if (!user || !user.email_verified_at) {
         return <Loading />
     }
 
