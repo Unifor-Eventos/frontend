@@ -9,11 +9,27 @@ import { DropdownButton } from '@/components/DropdownLink'
 import { useAuth } from '@/hooks/auth'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
+import { isOrganizer } from '@/utils/roles'
+
+const loadPaths = (user) => [
+    {
+        name: 'Dashboard',
+        href: '/dashboard',
+        canAccess: true
+    },
+    {
+        name: 'Eventos',
+        href: '/eventos',
+        canAccess: isOrganizer(user)
+    }
+]
 
 const Navigation = ({ user }) => {
     const { logout } = useAuth()
 
     const [open, setOpen] = useState(false)
+
+    const paths = loadPaths(user)
 
     return (
         <nav className="bg-white border-b border-gray-100">
@@ -30,11 +46,14 @@ const Navigation = ({ user }) => {
 
                         {/* Navigation Links */}
                         <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <NavLink
-                                href="/dashboard"
-                                active={usePathname() === '/dashboard'}>
-                                Dashboard
-                            </NavLink>
+                            {paths.map(path => (
+                                path.canAccess &&
+                                <NavLink
+                                    href={path.href}
+                                    active={usePathname() === path.href}>
+                                    {path.name}
+                                </NavLink>
+                            ))}
                         </div>
                     </div>
 
@@ -105,11 +124,14 @@ const Navigation = ({ user }) => {
             {open && (
                 <div className="block sm:hidden">
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink
-                            href="/dashboard"
-                            active={usePathname() === '/dashboard'}>
-                            Dashboard
-                        </ResponsiveNavLink>
+                        {paths.map(path => (
+                            path.canAccess &&
+                            <ResponsiveNavLink
+                                href={path.href}
+                                active={usePathname() === path.href}>
+                                {path.name}
+                            </ResponsiveNavLink>
+                        ))}
                     </div>
 
                     {/* Responsive Settings Options */}
