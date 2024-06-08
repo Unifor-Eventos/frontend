@@ -18,8 +18,8 @@ const loadPaths = (user) => [
         canAccess: true
     },
     {
-        name: 'Eventos',
-        href: '/eventos',
+        name: 'Meus Eventos',
+        href: '/meus-eventos',
         canAccess: isOrganizer(user)
     }
 ]
@@ -46,9 +46,10 @@ const Navigation = ({ user }) => {
 
                         {/* Navigation Links */}
                         <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            {paths.map(path => (
+                            {paths.map((path, index) => (
                                 path.canAccess &&
                                 <NavLink
+                                    key={index}
                                     href={path.href}
                                     active={usePathname() === path.href}>
                                     {path.name}
@@ -124,9 +125,10 @@ const Navigation = ({ user }) => {
             {open && (
                 <div className="block sm:hidden">
                     <div className="pt-2 pb-3 space-y-1">
-                        {paths.map(path => (
+                        {paths.map((path, index) => (
                             path.canAccess &&
                             <ResponsiveNavLink
+                                key={index}
                                 href={path.href}
                                 active={usePathname() === path.href}>
                                 {path.name}
