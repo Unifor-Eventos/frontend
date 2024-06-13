@@ -10,6 +10,7 @@ import { useAuth } from '@/hooks/auth'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { isOrganizer } from '@/utils/roles'
+import { Button } from '@/components/ui/button'
 
 const loadPaths = (user) => [
     {
@@ -18,7 +19,7 @@ const loadPaths = (user) => [
         canAccess: true
     },
     {
-        name: 'Meus Eventos',
+        namedashboard: 'Meus Eventos',
         href: '/meus-eventos',
         canAccess: isOrganizer(user)
     }
@@ -60,6 +61,12 @@ const Navigation = ({ user }) => {
 
                     {/* Settings Dropdown */}
                     <div className="hidden sm:flex sm:items-center sm:ml-6">
+                        {isOrganizer(user) &&
+                            <Button asChild className="mr-4">
+                                <Link href="/events/create">Criar Evento</Link>
+                            </Button>
+                        }
+
                         <Dropdown
                             align="right"
                             width="48"

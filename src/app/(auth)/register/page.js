@@ -117,7 +117,6 @@ const Page = () => {
                     onChange={event =>
                         setIsOrganizer(event.target.checked)
                     }
-                    required
                 />
 
                 <Label htmlFor="isOrganizer">
