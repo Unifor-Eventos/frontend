@@ -48,9 +48,7 @@ const EnrollEvent = () => {
                 resume,
             }, resume_file);
 
-            if (response.status === 201) {
-                router.push(`/events/${eventId}`);
-            }
+            router.push(`/events/${eventId}`);
         } catch (error) {
             console.error('Erro ao criar o evento:', error);
         }

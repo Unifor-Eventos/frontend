@@ -44,7 +44,7 @@ const Page = () => {
                     id="name"
                     type="text"
                     value={name}
-                    className="block mt-1 w-full"
+                    className="block mt-1 w-full border border-black"
                     onChange={event => setName(event.target.value)}
                     required
                     autoFocus
@@ -61,7 +61,7 @@ const Page = () => {
                     id="email"
                     type="email"
                     value={email}
-                    className="block mt-1 w-full"
+                    className="block mt-1 w-full border border-black"
                     onChange={event => setEmail(event.target.value)}
                     required
                 />
@@ -71,13 +71,13 @@ const Page = () => {
 
             {/* Password */}
             <div className="mt-4">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">Senha</Label>
 
                 <Input
                     id="password"
                     type="password"
                     value={password}
-                    className="block mt-1 w-full"
+                    className="block mt-1 w-full border border-black"
                     onChange={event => setPassword(event.target.value)}
                     required
                     autoComplete="new-password"
@@ -89,14 +89,14 @@ const Page = () => {
             {/* Confirm Password */}
             <div className="mt-4">
                 <Label htmlFor="passwordConfirmation">
-                    Confirm Password
+                    Confirmar Senha
                 </Label>
 
                 <Input
                     id="passwordConfirmation"
                     type="password"
                     value={passwordConfirmation}
-                    className="block mt-1 w-full"
+                    className="block mt-1 w-full border border-black"
                     onChange={event =>
                         setPasswordConfirmation(event.target.value)
                     }
@@ -113,14 +113,14 @@ const Page = () => {
             <div className="mt-4 flex flex-row items-center">
                 <Input
                     type="checkbox"
-                    className="block mt-1 mr-2 h-6 w-6"
+                    className="block mt-1 mr-2 h-6 w-6 border border-black"
                     onChange={event =>
                         setIsOrganizer(event.target.checked)
                     }
                 />
 
                 <Label htmlFor="isOrganizer">
-                    Are you an event organizer?
+                    Você é um organizador?
                 </Label>
 
                 <InputError
@@ -133,10 +133,10 @@ const Page = () => {
                 <Link
                     href="/login"
                     className="underline text-sm text-gray-600 hover:text-gray-900">
-                    Already registered?
+                    Já é registrado?
                 </Link>
 
-                <Button className="ml-4">Register</Button>
+                <Button className="ml-4">Registrar</Button>
             </div>
         </form>
     )

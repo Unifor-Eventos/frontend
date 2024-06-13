@@ -27,9 +27,8 @@ const Page = () => {
     return (
         <>
             <div className="mb-4 text-sm text-gray-600">
-                Forgot your password? No problem. Just let us know your email
-                email address and we will email you a password reset link that
-                that will allow you to choose a new one.
+                Esqueceu a sua senha? Sem problemas. Apenas nos informe o seu email
+                e nós lhe enviaremos um link para redefinir a sua senha.
             </div>
 
             {/* Session Status */}
@@ -44,7 +43,7 @@ const Page = () => {
                         type="email"
                         name="email"
                         value={email}
-                        className="block mt-1 w-full"
+                        className="block mt-1 w-full border border-black"
                         onChange={event => setEmail(event.target.value)}
                         required
                         autoFocus
@@ -54,7 +53,7 @@ const Page = () => {
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    <Button>Email Password Reset Link</Button>
+                    <Button>Enviar link para redefinição de senha</Button>
                 </div>
             </form>
         </>

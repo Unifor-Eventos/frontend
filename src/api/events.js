@@ -20,7 +20,7 @@ async function update(id, data, file) {
         updateImage(id, file)
     }
 
-    return axios.patch(`/events/${id}`)
+    return axios.patch(`/events/${id}`, { ...data })
 }
 
 async function updateImage(id, file) {

@@ -56,7 +56,7 @@ const Login = () => {
                         id="email"
                         type="email"
                         value={email}
-                        className="block mt-1 w-full"
+                        className="block mt-1 w-full border border-black"
                         onChange={event => setEmail(event.target.value)}
                         required
                         autoFocus
@@ -67,13 +67,13 @@ const Login = () => {
 
                 {/* Password */}
                 <div className="mt-4">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">Senha</Label>
 
                     <Input
                         id="password"
                         type="password"
                         value={password}
-                        className="block mt-1 w-full"
+                        className="block mt-1 w-full border border-black"
                         onChange={event => setPassword(event.target.value)}
                         required
                         autoComplete="current-password"
@@ -101,7 +101,7 @@ const Login = () => {
                         />
 
                         <span className="ml-2 text-sm text-gray-600">
-                            Remember me
+                            Salvar meus dados
                         </span>
                     </label>
                 </div>
@@ -110,7 +110,7 @@ const Login = () => {
                     <Link
                         href="/forgot-password"
                         className="underline text-sm text-gray-600 hover:text-gray-900">
-                        Forgot your password?
+                        Esqueceu sua senha?
                     </Link>
 
                     <Button className="ml-3">Login</Button>
