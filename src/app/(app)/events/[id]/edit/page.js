@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PhotoIcon } from '@heroicons/react/24/solid';
 import Header from '@/app/(app)/Header';
 import { Button } from '@/components/ui/button';
@@ -8,19 +8,40 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
-import { EventAPI } from '@/api'; // Presumindo que o api.js ou api.ts é o arquivo onde está a função create
-import { useRouter } from 'next/navigation';
+import { EventAPI } from '@/api';
+import { useParams, useRouter } from 'next/navigation';
 
-const CreateEvent = () => {
+const UpdateEvent = () => {
     const router = useRouter();
+    const params = useParams()
+    const eventId = params.id;
     const [selectedImage, setSelectedImage] = useState(null);
     const [formData, setFormData] = useState({
+        id: undefined,
         title: '',
         description: '',
         is_virtual: false,
         start_at: '',
         finish_at: '',
     });
+
+    const getEvent = async () => {
+        const { data } = await EventAPI.getById(eventId);
+
+        setFormData({
+            title: data.title,
+            description: data.description,
+            is_virtual: data.is_virtual,
+            start_at: data.start_at,
+            finish_at: data.finish_at,
+        });
+
+        setSelectedImage(data.banner);
+    };
+
+    useEffect(() => {
+        getEvent();
+    }, [params.id]);
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -57,10 +78,13 @@ const CreateEvent = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Extraindo dados e arquivo do estado
         const { title, description, is_virtual, start_at, finish_at, file } = formData;
 
+        // Chamando a função create do API
         try {
-            const response = await EventAPI.create({
+            console.log(file)
+            const response = await EventAPI.update(eventId, {
                 title,
                 description,
                 is_virtual,
@@ -68,10 +92,7 @@ const CreateEvent = () => {
                 finish_at,
             }, file);
 
-            if (response.status === 201) {
-                router.push(`/events/${response.data.id}`);
-            }
-
+            console.log(response.data)
         } catch (error) {
             console.error('Erro ao criar o evento:', error);
         }
@@ -209,4 +230,4 @@ const CreateEvent = () => {
     )
 }
 
-export default CreateEvent
+export default UpdateEvent;
